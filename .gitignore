@@ -1,0 +1,12 @@
+# VSCode project preferencies
+.vscode/
+__pycache__
+
+# Poetry lock file
+poetry.lock
+
+# Datasets
+*.csv
+
+# Other
+test.py
