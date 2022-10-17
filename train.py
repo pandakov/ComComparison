@@ -28,11 +28,12 @@ drop_countries_list = np.vectorize(str.lower)(drop_countries_list)
 # Generate PRE pipeline
 pipe_pre = Pipe(
     TextTransform.to_lower_case(),
-    TextTransform.drop_char(chars=r".,()0123456789"),
-    TextTransform.drop_char(chars=r'-*"/&+', replace=" "),
+    TextTransform.drop_char(chars=r".,()0123456789«»$^#№"),
+    TextTransform.drop_char(chars=r'-*"/&+:@=\|?!', replace=" "),
     TextTransform.drop_words(words=drop_ownership_list),
-    # TextTransform.drop_words(words=drop_countries_list),
+    TextTransform.drop_words(words=drop_countries_list),
     TextTransform.drop_whitespaces(),
+    TextTransform.transliterate(),
 )
 data["name_1"] = pipe_pre(data["name_1"])
 data["name_2"] = pipe_pre(data["name_2"])
