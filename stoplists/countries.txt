@@ -1,6 +1,7 @@
 Afghanistan
 Albania
 Algeria
+America
 Andorra
 Angola
 Antigua and Barbuda
@@ -21,6 +22,7 @@ Bolivia
 Bosnia and Herzegovina
 Botswana
 Brazil
+Brasil
 Brunei
 Bulgaria
 Burkina Faso

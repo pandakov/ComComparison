@@ -133,6 +133,8 @@ class TextTransform:
             "ö": "o",
             "ü": "u",
             "ß": "ss",
+            "ç": "c",
+            "ş": "s",
         }
         capital_and_lower_case_letter_pairs = {}
         for (
