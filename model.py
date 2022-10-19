@@ -27,19 +27,16 @@ class TextTransform:
 
         return wrapper
 
-    @staticmethod
     @for_pipeline
     def to_lower_case(s: str) -> str:
         return s.lower()
 
-    @staticmethod
     @for_pipeline
     def drop_char(s: str, chars: str = r".,()0123456789«»", replace: str = "") -> str:
         for c in chars:
             s = s.replace(c, replace)
         return s
 
-    @staticmethod
     @for_pipeline
     def drop_words(s: str, words: list[str]) -> str:
         s = " " + s + " "
@@ -47,12 +44,10 @@ class TextTransform:
             s = s.replace(" " + w + " ", " ")
         return s.strip()
 
-    @staticmethod
     @for_pipeline
     def drop_whitespaces(s: str) -> str:
         return " ".join(s.strip().split())
 
-    @staticmethod
     @for_pipeline
     def transliterate(string: str) -> str:
         capital_letters = {
@@ -197,9 +192,8 @@ class Pipe:
         elif type(d) == pd.Series:
             for s in self.sequence:
                 d = Pipe.series_map(d, s[0], s[1], s[2])
-        elif type(d) == pd.DataFrame:
-            for s in self.sequence:
-                d = Pipe.dataframe_map(d, s[0], s[1], s[2])
+        elif type(d) == str:
+            d = s[0](d, *s[1], **s[2])
         return d
 
     def __repr__(self) -> str:
@@ -208,8 +202,3 @@ class Pipe:
 
     def add2pipe(self, func: Callable, *args, **kwargs):
         return self.sequence.append(func, args, kwargs)
-
-
-if __name__ == "__main__":
-    data = np.eye(5)
-    print(data)

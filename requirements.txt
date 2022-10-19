@@ -4,6 +4,8 @@
 # Base ----------------------------------------
 numpy>=1.23.4
 pandas>=1.5.0
+scikit-learn>=1.1.2
+notebook>=6.5.1
 
 # Code style
 black>=22.3.0

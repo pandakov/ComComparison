@@ -36,6 +36,7 @@ pipe_pre = Pipe(
     TextTransform.drop_whitespaces(),
     TextTransform.transliterate(),
 )
+
 data["name_1"] = pipe_pre(data["name_1"])
 data["name_2"] = pipe_pre(data["name_2"])
 print(data.tail())
