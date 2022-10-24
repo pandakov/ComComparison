@@ -5,6 +5,7 @@ Training script.
 Use this script on raw dataset for preparing data and teaching module (on future).
 
 """
+
 from pathlib import Path
 
 import numpy as np
@@ -12,10 +13,12 @@ import pandas as pd
 
 from model import Pipe, TextTransform
 
+duplicate_sign = "is_duplicate"
+
 # Downloading raw training dataset
 raw_data = pd.read_csv(Path(r"data/train.csv"), index_col=0)
 # Loc company name pairs
-data = raw_data.loc[raw_data["is_duplicate"] == 1.0].drop(columns=["is_duplicate"])
+data = raw_data.loc[raw_data[duplicate_sign] == 1.0].drop(columns=[duplicate_sign])
 
 # Downloading stoping words
 drop_ownership_list = np.genfromtxt(
@@ -37,9 +40,12 @@ pipe_pre = Pipe(
     TextTransform.transliterate(),
 )
 
-data["name_1"] = pipe_pre(data["name_1"])
-data["name_2"] = pipe_pre(data["name_2"])
-print(data.tail())
+# for column in data.columns:
+# data[column] = pipe_pre(data[column])
+
+data = pipe_pre(data)
+
+print(data)
 
 # Writing prepared data
 data.to_csv(Path(r"data/result.csv"))

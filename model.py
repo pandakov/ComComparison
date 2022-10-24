@@ -179,7 +179,9 @@ class Pipe:
 
     @staticmethod
     def dataframe_map(data: pd.DataFrame, func: Callable, args, kwargs):
-        return data.apply(func, args=args, **kwargs)
+        for c in data.columns:
+            data[c] = data[c].apply(func, args=args, **kwargs)
+        return data
 
     def __init__(self, *sequence):
         self.sequence = sequence
@@ -194,6 +196,9 @@ class Pipe:
                 d = Pipe.series_map(d, s[0], s[1], s[2])
         elif type(d) == str:
             d = s[0](d, *s[1], **s[2])
+        elif type(d) == pd.DataFrame:
+            for s in self.sequence:
+                d = Pipe.dataframe_map(d, s[0], s[1], s[2])
         return d
 
     def __repr__(self) -> str:
