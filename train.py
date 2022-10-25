@@ -19,8 +19,8 @@ duplicate_sign = "is_duplicate"
 # Downloading raw training dataset
 raw_data = pd.read_csv(Path(r"data/train.csv"), index_col=0)
 # Loc company name pairs
-# data = raw_data.loc[raw_data[duplicate_sign] == 1.0].drop(columns=[duplicate_sign])
-data = raw_data.drop(columns=[duplicate_sign])
+data = raw_data.loc[raw_data[duplicate_sign] == 1.0].drop(columns=[duplicate_sign])
+# data = raw_data.drop(columns=[duplicate_sign])
 res = pd.DataFrame()
 res["raw"] = pd.concat([data[c] for c in data.columns], ignore_index=True)
 

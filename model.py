@@ -187,7 +187,10 @@ class Pipe:
         self.sequence = sequence
 
     def __call__(self, data: pd.Series, inline: bool = False) -> pd.Series:
-        d = data if inline else data.copy()
+        if type(data) != str:
+            d = data if inline else data.copy()
+        else:
+            d = data
         if type(d) == np.ndarray:
             for s in self.sequence:
                 d = Pipe.ndarray_map(d, s[0], s[1], s[2])
@@ -195,7 +198,8 @@ class Pipe:
             for s in self.sequence:
                 d = Pipe.series_map(d, s[0], s[1], s[2])
         elif type(d) == str:
-            d = s[0](d, *s[1], **s[2])
+            for s in self.sequence:
+                d = s[0](d, *s[1], **s[2])
         elif type(d) == pd.DataFrame:
             for s in self.sequence:
                 d = Pipe.dataframe_map(d, s[0], s[1], s[2])
