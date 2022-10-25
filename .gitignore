@@ -12,5 +12,10 @@ poetry.lock
 # Other
 test.py
 experiments/.ipynb_checkpoints
+.ipynb_checkpoints
 .DS_Store
 .idea
+
+#venv
+/venv
+
