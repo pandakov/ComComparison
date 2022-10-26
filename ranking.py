@@ -1,5 +1,7 @@
 from pathlib import Path
 from joblib import load
+import nltk
+nltk.download('punkt')
 
 import numpy as np
 import pandas as pd
@@ -7,7 +9,6 @@ import re
 from nltk.tokenize import word_tokenize
 from gensim.models import Word2Vec
 from scipy.special import softmax
-
 from model import Pipe, TextTransform
 
 
@@ -45,10 +46,10 @@ def rank(comp_name: str, k: int, embedded_df, model, pipe_pre, *args):
 def main():
     
     # Load data and models
-    logit = load("data/logit2.joblib")
-    word_2_vec_model = Word2Vec.load("data/word2vec2.model")
+    logit = load("data/logit.joblib")
+    word_2_vec_model = Word2Vec.load("data/word2vec.model")
     vocab_w2v = list(word_2_vec_model.wv.index_to_key)
-    embedded_df = pd.read_hdf("data/embeddings2.h5").dropna()
+    embedded_df = pd.read_hdf("data/embeddings.h5").dropna()
 
     # Downloading stoping words
     drop_ownership_list = np.genfromtxt(

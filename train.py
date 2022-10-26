@@ -17,7 +17,8 @@ import gensim
 from sklearn.linear_model import LogisticRegression
 
 from model import Pipe, TextTransform
-
+import nltk
+nltk.download('punkt')
 
 duplicate_sign = "is_duplicate"
 companies_columns = ['name_1', 'name_2']

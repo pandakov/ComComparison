@@ -45,50 +45,71 @@
 
 ###  	&#128270; Нейронная поисковая система
 Выполнен в стиле классического браузерного поисковика. Позволяет вывести все созвучные организации.
+```python
+Введите название компании:
+>>>
+```
 
-![taskflow1](https://user-images.githubusercontent.com/11793384/159693816-fda35221-9751-43bb-b05c-7fc77571dd76.gif)
+#### ❓ Настройка подготовки данных
 
+Для тренировки модели можно использовать удобный папплайн `train.py`
+```python
+# Generate PRE pipeline
+pipe_pre = Pipe(
+    TextTransform.to_lower_case(),
+    TextTransform.drop_char(chars=r".,()0123456789«»$^#№"),
+    TextTransform.drop_char(chars=r'-*"/&+:;@=\|?!' + r"'", replace=" "),
+    TextTransform.drop_words(words=drop_ownership_list),
+    TextTransform.drop_words(words=drop_countries_list),
+    TextTransform.drop_whitespaces(),
+    TextTransform.transliterate(),
+)
+```
 
-#### ❓ Написать про пайплайн Виктора
+#### 💌 NLTK и spaCy 
 
-
-We provide question answering pipeline which can support FAQ system, Document-level Visual Question answering system based on [🚀RocketQA](https://github.com/PaddlePaddle/RocketQA).
-
-<div align="center">
-    <img src="https://user-images.githubusercontent.com/11793384/168514868-1babe981-c675-4f89-9168-dd0a3eede315.gif" width="400">
-</div>
-
-
-#### 💌 Написать про nltk 
-
-We build an opinion extraction system for product review and fine-grained sentiment analysis based on [SKEP](https://arxiv.org/abs/2005.05635) Model.
-
-<div align="center">
-    <img src="https://user-images.githubusercontent.com/11793384/168407260-b7f92800-861c-4207-98f3-2291e0102bbe.png" width="300">
-</div>
+Пункт в разработке
 
 
 #### ⚡ Пример работы
 
-<div align="center">
-    <img src="https://user-images.githubusercontent.com/11793384/168407921-b4395b1d-44bd-41a0-8c58-923ba2b703ef.png" width="400">
-</div>
-
 ```python
-AutoTokenizer.from_pretrained("ernie-3.0-medium-zh", use_faster=True)
+Введите название компании:
+bridgestone
+
+Топ 10 похожих компаний:
+1: Zeon Research Vietnam Co., Ltd; вероятность дубля: 1.0
+2: Bridgestone India; вероятность дубля: 1.0
+3: Bridgestone International Group; вероятность дубля: 1.0
+4: Bridgestone De Mexico S.A. De C.V.; вероятность дубля: 1.0
+5: Bridgestone De Costa Rica S.A.; вероятность дубля: 1.0
+6: Bridgestone India Pvt., Ltd.; вероятность дубля: 1.0
+7: Bridgestone Canada Inc.; вероятность дубля: 1.0
+8: Bridgestone Firestone De Mexico Sa De Cv; вероятность дубля: 0.99
+9: Bridgestone Neumaticos De; вероятность дубля: 0.99
+10: Michelin Americas Research; вероятность дубля: 0.99
 ```
 
-Set `use_faster=True` to use C++ Tokenizer kernel to achieve 100x faster on text pre-processing. For more usage please refer to [FasterTokenizer](./faster_tokenizer).
+```python
+Введите название компании:
+
+pir
+
+Похожих компаний нет в списке или введены кракозябры
+```
+
+```python
+Введите название компании:
+
+dsfhsdhsdhdfh
+
+Похожих компаний нет в списке или введены кракозябры
+```
 
 
 #### 🚀 Метрики
 
-<div align="center">
-    <img src="https://user-images.githubusercontent.com/11793384/168515134-513f13e0-9902-40ef-98fa-528271dcccda.png" width="300">
-</div>
-
-
-For more super large-scale model pre-training details please refer to [GPT-3](./examples/language_model/gpt-3).
+Пункт в разработке
 
 ## &#128204;Installation
 
@@ -117,20 +138,28 @@ poetry install
 
 
 ## &#128204; Quick Start
-
- Илюха напиши что-то да как. С нашей базой и с базой клиентов
+> Сценарий 1 - Обучаем на ваших данных
+ 
+ 
+ 
+В папку `/data` добавляете свой `train.csv`
 
 ```python
-import ranking
-from ranking import main 
-import importlib
-importlib.reload(ranking)
-
-main()
->>> 
+>>>train()
+>>>ranking()
 ```
+Программа формирует файлы весов(`embeddings.h5`, `logit.joblib`, `word2vec.model`) и добавляет в `/data`.
+Трейн лежит на [диске](https://drive.google.com/file/d/1e9bdr7wcQX_YBudQcsKj-sMoIGxQOlK4/view)
 
- Use `AutoModel` API to **⚡SUPER FAST⚡** download pretrained models of different architecture. 
+> Сценарий 2 - используем наши веса
+
+В папку `/data` добавляете свой `embeddings.h5`, `logit.joblib`, `word2vec.model`
+
+```python
+>>>ranking()
+```
+Они лежать на [диске](https://drive.google.com/drive/folders/1b3BEHNyzqOKzoOP4HaH4zU5SXu3_lwOD?usp=sharing)
+
 ## &#128204;Community
 
 ### Расти вместе с AI Talent Hub!
