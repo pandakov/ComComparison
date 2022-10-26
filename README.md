@@ -2,35 +2,36 @@
   <img src="https://tools.pixelplus.ru/images/1647520977image1.png" align="middle"  width="600" />
 </p>
 
-------------------------------------------------------------------------------------------
+
 <h2 align="center">
-  **ComComparison**
+  ComComparison
 </h2>
 
+<h4 align="center">
 
+![1](https://img.shields.io/badge/python-3.10.6+-aff.svg)
+![2](https://img.shields.io/badge/os-linux%2C%20win%2C%20mac-pink.svg)
+![3](https://img.shields.io/github/stars/pandakov/ComComparison?color=ccf)
+![4](https://img.shields.io/github/v/release/pandakov/ComComparison?color=ffa)
+
+</h4>
+
+-----------------------------------------------
 
 <h4 align="center">
   <a href=#features> Features </a> |
   <a href=#installation> Installation </a> |
   <a href=#quick-start> Quick Start </a> |
-  <a href=#api-reference> API Reference </a> |
   <a href=#community> Community </a>
 </h4>
 
-<p align="center">
-    
-    <a href="https://github.com/pandakov/ComComparison/releases"><img src="https://img.shields.io/github/v/release/pandakov/ComComparison?color=ffa"></a>
-    <a href=""><img src="https://img.shields.io/badge/python-3.10.6+-aff.svg"></a>
-    <a href=""><img src="https://img.shields.io/badge/os-linux%2C%20win%2C%20mac-pink.svg"></a>
-    <a href=><img src="https://img.shields.io/github/stars/pandakov/ComComparison?color=ccf"></a>
-</p>
+-----------------------------------------------
 
 **ComComparison** это *простая в использовании* и *мощная* командная строка. Готовое решение для вас!
 
 
 
 ## &#128204;Features
----------------
 
 ### &#128642;Под капотом  (Мы предоставляем сценарий):
 * Внесение своей базы данных  &#128194;
@@ -47,11 +48,9 @@
 
 ![taskflow1](https://user-images.githubusercontent.com/11793384/159693816-fda35221-9751-43bb-b05c-7fc77571dd76.gif)
 
-<div align="center">
-    <img src="https://user-images.githubusercontent.com/11793384/168514909-8817d79a-72c4-4be1-8080-93d1f682bb46.gif" width="400">
-</div>
 
-#### ❓ Question Answering System
+#### ❓ Написать про пайплайн Виктора
+
 
 We provide question answering pipeline which can support FAQ system, Document-level Visual Question answering system based on [🚀RocketQA](https://github.com/PaddlePaddle/RocketQA).
 
@@ -60,10 +59,7 @@ We provide question answering pipeline which can support FAQ system, Document-le
 </div>
 
 
-For more details please refer to [Question Answering](./applications/question_answering) and [Document VQA](./applications/document_intelligence/doc_vqa).
-
-
-#### 💌 Opinion Extraction and Sentiment Analysis
+#### 💌 Написать про nltk 
 
 We build an opinion extraction system for product review and fine-grained sentiment analysis based on [SKEP](https://arxiv.org/abs/2005.05635) Model.
 
@@ -72,14 +68,7 @@ We build an opinion extraction system for product review and fine-grained sentim
 </div>
 
 
-For more details please refer to [Sentiment Analysis](./applications/sentiment_analysis).
-
-
-For more details please refer to [Speech Command Analysis](./applications/speech_cmd_analysis).
-
-### High Performance Distributed Training and Inference
-
-#### ⚡ FasterTokenizer: High Performance Text Preprocessing Library
+#### ⚡ Пример работы
 
 <div align="center">
     <img src="https://user-images.githubusercontent.com/11793384/168407921-b4395b1d-44bd-41a0-8c58-923ba2b703ef.png" width="400">
@@ -91,23 +80,8 @@ AutoTokenizer.from_pretrained("ernie-3.0-medium-zh", use_faster=True)
 
 Set `use_faster=True` to use C++ Tokenizer kernel to achieve 100x faster on text pre-processing. For more usage please refer to [FasterTokenizer](./faster_tokenizer).
 
-#### ⚡ FasterGeneration: High Perforance Generation Library
 
-<div align="center">
-    <img src="https://user-images.githubusercontent.com/11793384/168407831-914dced0-3a5a-40b8-8a65-ec82bf13e53c.gif" width="400">
-</div>
-
-```python
-model = GPTLMHeadModel.from_pretrained('gpt-cpm-large-cn')
-...
-outputs, _ = model.generate(
-    input_ids=inputs_ids, max_length=10, decode_strategy='greedy_search',
-    use_faster=True)
-```
-
-Set `use_faster=True` to achieve 5x speedup for Transformer, GPT, BART, PLATO, UniLM text generation. For more usage please refer to [FasterGeneration](./faster_generation).
-
-#### 🚀 Fleet: 4D Hybrid Distributed Training
+#### 🚀 Метрики
 
 <div align="center">
     <img src="https://user-images.githubusercontent.com/11793384/168515134-513f13e0-9902-40ef-98fa-528271dcccda.png" width="300">
@@ -117,7 +91,7 @@ Set `use_faster=True` to achieve 5x speedup for Transformer, GPT, BART, PLATO, U
 For more super large-scale model pre-training details please refer to [GPT-3](./examples/language_model/gpt-3).
 
 ## &#128204;Installation
-------------------
+
 ### Используемые библиотеки
 
 * python >= 3.10
@@ -143,8 +117,8 @@ poetry install
 
 
 ## &#128204; Quick Start
----------------------
-**Taskflow** aims to provide off-the-shelf NLP pre-built task covering NLU and NLG scenario, in the meanwhile with extreamly fast infernece satisfying industrial applications.
+
+ Илюха напиши что-то да как. С нашей базой и с базой клиентов
 
 ```python
 import ranking
@@ -156,38 +130,20 @@ main()
 >>> 
 ```
 
- Use `AutoModel` API to **⚡SUPER FAST⚡** download pretrained models of different architecture. We welcome all developers to contribute your Transformer models to PaddleNLP!
-
-```python
-from paddlenlp.transformers import *
-
-ernie = AutoModel.from_pretrained('ernie-3.0-medium-zh')
-bert = AutoModel.from_pretrained('bert-wwm-chinese')
-
-```
-
-## &#128204;API Reference
----------------------
-- Support [LUGE](https://www.luge.ai/) dataset loading and compatible with Hugging Face [Datasets](https://huggingface.co/datasets). For more details please refer to [Dataset API](https://paddlenlp.readthedocs.io/zh/latest/data_prepare/dataset_list.html).
-- Using Hugging Face style API to load 500+ selected transformer models and download with fast speed. For more information please refer to [Transformers API](https://paddlenlp.readthedocs.io/zh/latest/model_zoo/index.html).
-- One-line of code to load pre-trained word embedding. For more usage please refer to [Embedding API](https://paddlenlp.readthedocs.io/zh/latest/model_zoo/embeddings.html).
-
-Please find all PaddleNLP API Reference from our [readthedocs](https://paddlenlp.readthedocs.io/).
-
-
+ Use `AutoModel` API to **⚡SUPER FAST⚡** download pretrained models of different architecture. 
 ## &#128204;Community
----------------------------
+
 ### Расти вместе с AI Talent Hub!
 На базе [AI Talent Hub](https://ai.itmo.ru/) Университет ИТМО совместно с компанией Napoleon IT запустил образовательную программу «Инженерия машинного обучения». Это не краткосрочные курсы без практического применения, а онлайн-магистратура нового формата, основанная на реальном рабочем процессе в компаниях.
 
 Этот проект создан в рамках второго задания по курсу: "Глубокое обучение на практике"
 
 Мы команда ViN:
-* Виктор
-* Илья
-* Никита
+* [Виктор](https://t.me/anoninf)
+* [Илья](https://t.me/sadinhead)
+* [Никита](https://t.me/space_apple)
 
-<details><summary> &#128516;**Шутейка**</summary>
+<details><summary> &#128516; Шутейка </summary>
 <p>
 
 ![Jokes Card](https://readme-jokes.vercel.app/api)
