@@ -35,7 +35,6 @@ def rank(comp_name: str, k: int, embedded_df, model, pipe_pre, *args):
     comp_name_emb = get_embedding(comp_name_clear, *args)
     comp_name_df = np.array([comp_name_emb for i in range(embedded_df.shape[0])])
     full_df = pd.DataFrame(np.hstack([comp_name_df, embedded_df[range(embedded_df.shape[1] - 1)]]))
-    # full_df = PUK-PUK
     full_df['preds'] = model.predict_proba(full_df)[:,1]
     full_df['names'] = embedded_df['names'].values
     ans = full_df.sort_values(by='preds', ascending=False)[['names', 'preds']][0:k].values.tolist()
@@ -45,10 +44,10 @@ def rank(comp_name: str, k: int, embedded_df, model, pipe_pre, *args):
 def main():
     
     # Load data and models
-    logit = load("data/logit2.joblib")
-    word_2_vec_model = Word2Vec.load("data/word2vec2.model")
+    logit = load("data/logit.joblib")
+    word_2_vec_model = Word2Vec.load("data/word2vec.model")
     vocab_w2v = list(word_2_vec_model.wv.index_to_key)
-    embedded_df = pd.read_hdf("data/embeddings2.h5").dropna()
+    embedded_df = pd.read_hdf("data/embeddings.h5").dropna()
 
     # Downloading stoping words
     drop_ownership_list = np.genfromtxt(
