@@ -36,7 +36,6 @@ def rank(comp_name: str, k: int, embedded_df, model, pipe_pre, *args):
     comp_name_emb = get_embedding(comp_name_clear, *args)
     comp_name_df = np.array([comp_name_emb for i in range(embedded_df.shape[0])])
     full_df = pd.DataFrame(np.hstack([comp_name_df, embedded_df[range(embedded_df.shape[1] - 1)]]))
-    # full_df = PUK-PUK
     full_df['preds'] = model.predict_proba(full_df)[:,1]
     full_df['names'] = embedded_df['names'].values
     ans = full_df.sort_values(by='preds', ascending=False)[['names', 'preds']][0:k].values.tolist()
