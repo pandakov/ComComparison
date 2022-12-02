@@ -20,7 +20,6 @@ class TextTransform:
 
     """
 
-
     def for_pipeline(func):
         def wrapper(*args, **kwargs):
             return func, args, kwargs
@@ -169,14 +168,11 @@ class Pipe:
 
     sequence: List[TextTransform]
 
-
     def ndarray_map(data: np.ndarray, func: Callable, args, kwargs):
         return np.vectorize(func)(data, *args, **kwargs)
 
-
     def series_map(data: pd.Series, func: Callable, args, kwargs):
         return data.apply(func, args=args, **kwargs)
-
 
     def dataframe_map(data: pd.DataFrame, func: Callable, args, kwargs):
         for c in data.columns:

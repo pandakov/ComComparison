@@ -1,7 +1,8 @@
 from pathlib import Path
 from joblib import load
 import nltk
-nltk.download('punkt')
+
+nltk.download("punkt")
 
 import numpy as np
 import pandas as pd
@@ -15,7 +16,7 @@ from model import Pipe, TextTransform
 def get_tokenize_sentence(sent):
     data = []
     for i in word_tokenize(sent):
-        data.append(i.lower()) 
+        data.append(i.lower())
     return data
 
 
@@ -29,21 +30,25 @@ def get_embedding(comp_name, *args):
     emb_name = sent_vector(tokenize_name, *args)
     return emb_name
 
- 
+
 def rank(comp_name: str, k: int, embedded_df, model, pipe_pre, *args):
     comp_name_clear = pipe_pre(comp_name, inline=True).strip()
     # comp_name_clear = re.sub(r'[^\w\s]', ' ', comp_name).strip()
     comp_name_emb = get_embedding(comp_name_clear, *args)
     comp_name_df = np.array([comp_name_emb for i in range(embedded_df.shape[0])])
-    full_df = pd.DataFrame(np.hstack([comp_name_df, embedded_df[range(embedded_df.shape[1] - 1)]]))
-    full_df['preds'] = model.predict_proba(full_df)[:,1]
-    full_df['names'] = embedded_df['names'].values
-    ans = full_df.sort_values(by='preds', ascending=False)[['names', 'preds']][0:k].values.tolist()
+    full_df = pd.DataFrame(
+        np.hstack([comp_name_df, embedded_df[range(embedded_df.shape[1] - 1)]])
+    )
+    full_df["preds"] = model.predict_proba(full_df)[:, 1]
+    full_df["names"] = embedded_df["names"].values
+    ans = full_df.sort_values(by="preds", ascending=False)[["names", "preds"]][
+        0:k
+    ].values.tolist()
     return ans
 
 
 def main():
-    
+
     # Load data and models
     logit = load("data/logit.joblib")
     word_2_vec_model = Word2Vec.load("data/word2vec.model")
@@ -74,8 +79,9 @@ def main():
             break
         k = 10
         try:
-            top_comp = rank(comp_name, k, embedded_df, logit,
-                            pipe_pre, vocab_w2v, word_2_vec_model) 
+            top_comp = rank(
+                comp_name, k, embedded_df, logit, pipe_pre, vocab_w2v, word_2_vec_model
+            )
         except ValueError:
             print("Похожих компаний нет в списке или введены кракозябры\n\n")
             continue
