@@ -30,17 +30,61 @@
 **ComComparison** это *простая в использовании* и *мощная* командная строка. Готовое решение для вас!
 
 
-## &#128204;Дз по инженерным практикам в ML
+## &#128204;Дз3 по инженерным практикам в ML
 
-poetry add pre-commit
-pre-commit sample-config > .pre-commit-config.yaml
-pre-commit install
-pre-commit run --all-files
+- [x] Отформатировать код с помощью isort и black/autopep8/yapf.
+- [x] Выбрать набор плагинов для flake8 (от 5 штук).
+```py
+-   repo: https://github.com/PyCQA/flake8
+    rev: 6.0.0
+    hooks:
+    -   id: flake8
+        args: [--max-line-length=131]
+        additional_dependencies: [
+            'flake8-bugbear>=19.8.0',
+            'flake8-docstrings>=1.5.0',
+            'flake8-isort>=2.7.0',
+            'flake8-bandit>=3.0.0',
+            'flake8-expression-complexity>=0.0.11',
+            'flake8-annotations-complexity>=0.0.7',
+            'flake8-requirements>=1.5.3',
+        ]
+```
+
+- [x] Записать выбранные формтеры, линтеры и плагины в readme.md. (1 балла) \
+  Пишу их сюда) trailing-whitespace, end-of-file-fixer, check-yaml, check-added-large-files, black и flake8 с допами
+- [x] Зафиксировать настройки форматера и линтера в pyproject.toml или setup.cfg (1 балла)
+- [x] Настроить и добавить pre-commit в проект. (1 балла)
+- [x] Провести анализ кода с помощью flake8 и плагинов и зафиксировать проблемы в файле linting.md (1 балла)
+- [] Провести рефакторинг выявленных проблем. (3 балла)
+
+Стандартная установка и запуск pre-commit:
+
+```py
+poetry add pre-commit 
+pre-commit sample-config > .pre-commit-config.yaml 
+pre-commit install 
+pre-commit run --all-files 
+```
 
 если ошибки
-pre-commit clean
-pre-commit autoupdate
 
+```py
+pre-commit clean 
+pre-commit autoupdate 
+```
+
+Пример работы
+
+```sh
+(.venv) (base) nikivene@DESKTOP-78NOBF0:/mnt/c/Users/TurboFen/Desktop/Online_Edu/ComComparison$ pre-commit run --all-files
+trim trailing whitespace.................................................Passed
+fix end of files.........................................................Passed
+check yaml...............................................................Passed
+check for added large files..............................................Passed
+black....................................................................Passed
+flake8...................................................................Passed
+```
 
 
 ## &#128204;Features

@@ -5,19 +5,19 @@ Training script.
 Use this script on raw dataset for preparing data and teaching module (on future).
 
 """
-
-from pathlib import Path
-from joblib import dump
-import re
-
+import nltk
 import numpy as np
 import pandas as pd
+from joblib import dump
 from nltk.tokenize import word_tokenize
-import gensim
 from sklearn.linear_model import LogisticRegression
 
 from model import Pipe, TextTransform
-import nltk
+
+import re  # isort:skip
+import gensim  # isort:skip
+from pathlib import Path  # isort:skip
+
 
 nltk.download("punkt")
 
@@ -78,14 +78,16 @@ data["name_2"] = data[["name_2", "name_2_clear"]].apply(
 # Wor2Vec train
 
 
-def get_tokenize_sentence(sent):
+def get_tokenize_sentence(sent):  # g
+    """Return the pathname of the KOS root directory."""
     datas = []
     for i in word_tokenize(sent):
         datas.append(i.lower())
     return datas
 
 
-def sent_vector(sent, vocab_w2v, w2v_model):
+def sent_vector(sent, vocab_w2v, w2v_model):  # g
+    """Return the pathname of the KOS root directory."""
     sent = [word for word in sent if word in vocab_w2v]
     return np.mean(word_2_vec_model.wv[sent], axis=0)
 
