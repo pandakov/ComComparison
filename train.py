@@ -129,5 +129,5 @@ logit.fit(X, y)
 # Writing prepared data and models
 data.to_hdf(Path(r"data/result.h5"), key="df", mode="w", index=False)
 embedded_df.to_hdf(Path(r"data/embeddings.h5"), key="df", mode="w", index=False)
-word_2_vec_model.save("data/word2vec.model")
+word_2_vec_model.save(r"data/word2vec.model")
 dump(logit, Path(r"data/logit.joblib", sep=";"))
