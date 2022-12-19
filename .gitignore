@@ -15,6 +15,14 @@ experiments/.ipynb_checkpoints
 .ipynb_checkpoints
 .DS_Store
 .idea
+.venv
+venv
+
+# Models
+*.model
+*.h5
+*.pkl
+*.joblib
 
 #venv
 /venv
